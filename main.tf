@@ -85,9 +85,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     public_key = var.public_key
   }
 
-  source_image_reference {
-    id = data.azurerm_image.id
-  }
+  source_image_id = data.azurerm_image.image.id
 
   os_disk {
     storage_account_type = "Standard_LRS"
