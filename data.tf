@@ -1,4 +1,4 @@
-data "azurerm_image" {
+data "azurerm_image" "image" {
     name                = var.image_name
-    resource_group_name = var.resource_group
+    resource_group_name = var.image_resource_group
 }
