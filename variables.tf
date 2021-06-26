@@ -30,24 +30,23 @@ variable "application_port" {
   type        = string
 }
 
-# variables "sku" {
-#     description = "The SKU or size of the VM that will run the scale set"
-#     type        = string
-#     default     = "D2s_v3"
-# }
+variable "sku" {
+  description = "The sku for the VM scale set, i.e. Standard_D2s_v3"
+  type = string
+}
 
-# variable "unix_admin" {
-#     description = "The Unix Administration Account"
-#     type        = string
-# }
+variable "unix_admin" {
+    description = "The Unix Administration Account"
+    type        = string
+}
 
-# variable "public_key" {
-#     description = "The public key that is used to access the VM"
-# }
+variable "public_key" {
+    description = "The public key that is used to access the VM"
+}
 
-# variables "subnet_id" {
-#     description = "The subnet id where the VM IP address will be created"
-# }
+variable "subnet_id" {
+    description = "The subnet id where the VM IP address will be created"
+}
 
 variable "common_tags" {
   description = "A Map of common tags to assign to the network security group"
