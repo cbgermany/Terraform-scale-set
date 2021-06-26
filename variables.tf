@@ -25,6 +25,11 @@ variable "image_resource_group" {
   type        = string
 }
 
+variable "application_port" {
+  description = "The port for the load balancer to probe"
+  type        = string
+}
+
 # variables "sku" {
 #     description = "The SKU or size of the VM that will run the scale set"
 #     type        = string

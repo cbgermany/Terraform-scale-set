@@ -44,10 +44,30 @@ resource "azurerm_lb" "vmss" {
 
 # Create the load balancer backend address pool
 resource "azurerm_lb_backend_address_pool" "vmss" {
-  name                = format("%s-%s", var.name, "backendpool")
-  loadbalancer_id     = azurerm_lb.vmss.id
+  name             = format("%s-%s", var.name, "backendpool")
+  loadbalancer_id  = azurerm_lb.vmss.id
 }
 
+# Create the load balancer probe
+resource "azurerm_lb_probe" "vmss" {
+  name                = format("%s-%s", var.name, "lb-probe")
+  resource_group_name = var.resource_group
+  loadbalancer_id     = azurerm_lb.vmss.id
+  port                = var.application_port
+}
+
+# Create the load balancer Nat rule
+resource "azurerm_lb_rule" "vmss" {
+  resource_group_name            = var.resource_group
+  loadbalancer_id                = azurerm_lb.vmss.id
+  name                           = "http"
+  protocol                       = "Tcp"
+  frontend_port                  = var.application_port
+  backend_port                   = var.application_port
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.vmss.id
+  frontend_ip_configuration_name = "PublicIPAddress"
+  probe_id                       = azurerm_lb_probe.vmss.id
+}
 
 
 
