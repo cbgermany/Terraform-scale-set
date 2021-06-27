@@ -1,10 +1,3 @@
-# Prevent Terraform clashing with Auto scaling and Azre DevOps
-lifecycle {
-  ignore_changes = [
-    instances,
-  ]
-}
-
 #Generate a random string for the domain name
 resource "random_string" "fqdn" {
   length  = 6
@@ -78,24 +71,32 @@ resource "azurerm_lb_rule" "vmss" {
 
 # Create the Virtual Machine Scale Set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
-  name                = var.name
+
+  # Prevent Terraform clashing with Auto scaling and Azre DevOps
+  lifecycle {
+    ignore_changes = [
+      instances,
+    ]
+  }
+
+  name                = format("%s-%s", var.name, "vmss")
   resource_group_name = var.resource_group
   location            = var.location
 
   sku       = var.sku  
   instances = var.instances
 
-  admin_username = var.unix_admin
+  admin_username = var.admin_user
   admin_password = var.admin_password
 
   disable_password_authentication = false
 
   custom_data = base64encode(data.local_file.cloudinit.content)
 
-  admin_ssh_key {
-    username   = var.unix_admin
-    public_key = var.public_key
-  }
+  #admin_ssh_key {
+  #  username   = var.admin_user
+  #  public_key = var.public_key
+  #}
 
   source_image_id = data.azurerm_image.image.id
 

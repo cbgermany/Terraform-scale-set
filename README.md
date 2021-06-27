@@ -22,9 +22,10 @@ module "ghost_scale_set" {
   application_port = "443"
 
   sku = "Standard_D2s_v3"
+  instances = 1
 
-  unix_admin = "unixadmin"
-  public_key = "public_key"
+  admin_user = "unixadmin"
+  admin_password = "A strong password
 
   subnet_id = data.subnet.id
 
