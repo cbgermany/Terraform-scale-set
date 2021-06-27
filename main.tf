@@ -28,6 +28,7 @@ resource "azurerm_lb" "vmss" {
   name                = format("%s-%s", var.name, "lb")
   location            = var.location
   resource_group_name = var.resource_group
+  sku                 = "Standard"
 
   frontend_ip_configuration {
     name                 = format("%s-%s", var.name, "PublicIP")
