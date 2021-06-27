@@ -35,13 +35,19 @@ variable "sku" {
   type = string
 }
 
-variable "unix_admin" {
-    description = "The Unix Administration Account"
-    type        = string
+variable "instances" {
+  description = "The number of instances to be created in the scale set"
+  type        = number
 }
 
-variable "public_key" {
-    description = "The public key that is used to access the VM"
+variable "admin_user" {
+  description = "The Unix Administration Account"
+  type        = string
+}
+
+variable "admin_password" {
+  description = "The admin user password"
+  type        = string 
 }
 
 variable "subnet_id" {
