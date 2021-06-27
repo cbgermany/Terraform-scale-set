@@ -1,3 +1,10 @@
+# Prevent Terraform clashing with Auto scaling and Azre DevOps
+lifecycle {
+  ignore_changes = [
+    instances,
+  ]
+}
+
 #Generate a random string for the domain name
 resource "random_string" "fqdn" {
   length  = 6
