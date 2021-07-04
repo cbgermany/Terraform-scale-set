@@ -12,7 +12,7 @@ data "template_cloudinit_config" "config" {
   # Main cloud-config configuration file.
   part {
     content_type = "text/cloud-config"
-    content      = templatefile("${path.module}/templates/cloudinit.conf}", 
+    content      = templatefile("${path.module}/templates/cloudinit.conf", 
         {
           url       = var.url,
           admin_url = var.admin_url,

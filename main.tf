@@ -92,7 +92,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
 
   disable_password_authentication = false
 
-  custom_data = base64encode(data.local_file.cloudinit.content)
+  custom_data = base64encode(data.template_cloudinit_config.config.rendered)
 
   #admin_ssh_key {
   #  username   = var.admin_user
