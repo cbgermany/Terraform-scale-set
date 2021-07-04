@@ -121,7 +121,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   tags = merge(
     var.common_tags,
     tomap(
-      {"Component" = "Database"}
+      {"Component" = "Scale Set"}
     )
   )
 }
