@@ -58,3 +58,22 @@ variable "common_tags" {
   description = "A Map of common tags to assign to the network security group"
   type        = map(string)
 }
+
+variable "url" {
+  description = "The url for the Ghost blog"
+  type        = string
+}
+
+variable "admin_url" {
+  description = "The admin url for the Ghost blog"
+  type        = string
+}
+
+variable "endpoint" {
+  description = "The MySQL database server endpoint"
+}
+
+variable "database" {
+  description = "The name of the database"
+  type        = string
+}
