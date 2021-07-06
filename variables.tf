@@ -5,6 +5,11 @@ variable "name" {
   type        = string
 }
 
+variable "domain_name_label" {
+  description = "The domain name associated with the Public IP of the Load Balancer"
+  type        = string
+}
+
 variable "resource_group" {
   description = "The resource group associated with the database"
   default     = "mysqlRG"

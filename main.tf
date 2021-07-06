@@ -1,18 +1,10 @@
-#Generate a random string for the domain name
-resource "random_string" "fqdn" {
-  length  = 6
-  special = false
-  upper   = false
-  number  = false
-}
-
 # Create Standard Public IP for the load balancer across Availability Zones
 resource "azurerm_public_ip" "vmss" {
   name                 = format("%s-%s", var.name, "publicIp")
   location             = var.location
   resource_group_name  = var.resource_group
   allocation_method    = "Static"
-  domain_name_label    = random_string.fqdn.result
+  domain_name_label    = var.domain_name_label
   sku                  = "Standard"
 
   tags = merge(
