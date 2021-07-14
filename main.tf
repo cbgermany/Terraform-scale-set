@@ -60,6 +60,20 @@ resource "azurerm_lb_rule" "vmss" {
   backend_address_pool_id        = azurerm_lb_backend_address_pool.vmss.id
   frontend_ip_configuration_name = format("%s-%s", var.name, "PublicIP")
   probe_id                       = azurerm_lb_probe.vmss.id
+
+  disable_outbound_snat          = true
+}
+
+resource "azurerm_lb_outbound_rule" "vmss" {
+  resource_group_name     = var.resource_group
+  loadbalancer_id         = azurerm_lb.vmss.id
+  name                    = "OutboundRule"
+  protocol                = "Tcp"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.vmss.id
+
+  frontend_ip_configuration {
+    name = format("%s-%s", var.name, "PublicIP")
+  }
 }
 
 # Create the Virtual Machine Scale Set
