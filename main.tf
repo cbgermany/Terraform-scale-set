@@ -79,17 +79,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   sku       = var.sku  
   instances = var.instances
 
-  admin_username = var.admin_user
-  admin_password = var.admin_password
+  admin_username = var.ghost_admin_user
+  admin_password = var.ghost_admin_password
 
   disable_password_authentication = false
 
-  custom_data = base64encode(data.template_cloudinit_config.config.rendered)
-
-  #admin_ssh_key {
-  #  username   = var.admin_user
-  #  public_key = var.public_key
-  #}
+  custom_data = data.template_cloudinit_config.config.rendered
 
   source_image_id = data.azurerm_image.image.id
 

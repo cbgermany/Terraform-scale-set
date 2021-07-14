@@ -45,13 +45,23 @@ variable "instances" {
   type        = number
 }
 
-variable "admin_user" {
-  description = "The Unix Administration Account"
+variable "ghost_admin_user" {
+  description = "The username of the ghost admin user"
   type        = string
 }
 
-variable "admin_password" {
-  description = "The admin user password"
+variable "ghost_admin_password" {
+  description = "The password for the ghost admin user"
+  type       = string
+}
+
+variable "db_svr_admin_user" {
+  description = "The Unix Administration Account for the MySql server"
+  type        = string
+}
+
+variable "db_svr_admin_password" {
+  description = "The unix admin user password for the MySql server"
   type        = string 
 }
 

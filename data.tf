@@ -14,12 +14,13 @@ data "template_cloudinit_config" "config" {
     content_type = "text/cloud-config"
     content      = templatefile("${path.module}/templates/cloudinit.conf", 
         {
-          url       = var.url,
-          admin_url = var.admin_url,
-          endpoint  = var.endpoint,
-          username  = var.admin_user,
-          password  = var.admin_password,
-          database  = var.database
+          url         = var.url,
+          admin_url   = var.admin_url,
+          endpoint    = var.endpoint,
+          ghost_admin = var.ghost_admin_user
+          username    = var.db_svr_admin_user,
+          password    = var.db_svr_admin_password,
+          database    = var.database
         })
   }
 }
