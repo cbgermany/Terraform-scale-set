@@ -30,11 +30,6 @@ variable "image_resource_group" {
   type        = string
 }
 
-variable "application_port" {
-  description = "The port for the load balancer to probe"
-  type        = string
-}
-
 variable "sku" {
   description = "The sku for the VM scale set, i.e. Standard_D2s_v3"
   type = string
@@ -90,5 +85,10 @@ variable "endpoint" {
 
 variable "database" {
   description = "The name of the database"
+  type        = string
+}
+
+variable "sslemail" {
+  description = "The SSL email contact to be used for Let's Encrypt"
   type        = string
 }

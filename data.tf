@@ -20,7 +20,8 @@ data "template_cloudinit_config" "config" {
           ghost_admin = var.ghost_admin_user
           username    = var.db_svr_admin_user,
           password    = var.db_svr_admin_password,
-          database    = var.database
+          database    = var.database,
+          sslemail    = var.sslemail
         })
   }
 }

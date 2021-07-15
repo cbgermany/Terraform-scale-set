@@ -46,17 +46,32 @@ resource "azurerm_lb_probe" "vmss" {
   name                = format("%s-%s", var.name, "lb-probe")
   resource_group_name = var.resource_group
   loadbalancer_id     = azurerm_lb.vmss.id
-  port                = var.application_port
+  port                = 80
 }
 
-# Create the load balancer Nat rule
-resource "azurerm_lb_rule" "vmss" {
+# Create the load balancer rule for http
+resource "azurerm_lb_rule" "vmss_http" {
   resource_group_name            = var.resource_group
   loadbalancer_id                = azurerm_lb.vmss.id
   name                           = "http"
   protocol                       = "Tcp"
-  frontend_port                  = var.application_port
-  backend_port                   = var.application_port
+  frontend_port                  = 80
+  backend_port                   = 80
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.vmss.id
+  frontend_ip_configuration_name = format("%s-%s", var.name, "PublicIP")
+  probe_id                       = azurerm_lb_probe.vmss.id
+
+  disable_outbound_snat          = true
+}
+
+# Create the load balancer rule for https
+resource "azurerm_lb_rule" "vmss_https" {
+  resource_group_name            = var.resource_group
+  loadbalancer_id                = azurerm_lb.vmss.id
+  name                           = "https"
+  protocol                       = "Tcp"
+  frontend_port                  = 443
+  backend_port                   = 443
   backend_address_pool_id        = azurerm_lb_backend_address_pool.vmss.id
   frontend_ip_configuration_name = format("%s-%s", var.name, "PublicIP")
   probe_id                       = azurerm_lb_probe.vmss.id
