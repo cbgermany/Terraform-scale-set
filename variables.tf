@@ -38,6 +38,7 @@ variable "sku" {
 variable "instances" {
   description = "The number of instances to be created in the scale set"
   type        = number
+  default     = 1
 }
 
 variable "ghost_admin_user" {
